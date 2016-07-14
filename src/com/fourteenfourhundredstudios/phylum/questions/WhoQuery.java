@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class WhoQuery extends Query{
 	//this is my epic change from adam
 	//this is my epic change from Marc
+	//this is another change from Master
 	public WhoQuery(String fileData){
 		super(fileData);
 	}
