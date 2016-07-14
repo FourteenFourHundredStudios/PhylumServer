@@ -1,64 +1,40 @@
 package com.fourteenfourhundredstudios.phylum;
 
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.ArrayList;
 
-import javax.net.ssl.SSLSocketFactory;
-
-import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.pipeline.Annotation;
-import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.util.CoreMap;
-
-
-//import java.util.Properties;
+import com.fourteenfourhundredstudios.phylum.html.HTMLParser;
+import com.fourteenfourhundredstudios.phylum.questions.NPLHandler;
+import com.fourteenfourhundredstudios.phylum.questions.Query;
+import com.fourteenfourhundredstudios.phylum.questions.WhoQuery;
 
 public class Main {
 
-	StanfordCoreNLP pipeline ;
-	
 	public Main(){
 		
-		/*
-		Properties props = new Properties();
-		props.setProperty("annotators", "tokenize, ssplit, pos");
-		pipeline = new StanfordCoreNLP(props);
+		NPLHandler.load();
+		//
+		//ArrayList<String> nouns=query.getNouns();
 		
-		Scanner s = new Scanner(System.in);
+		HTMLParser hp = new HTMLParser(Utilities.readFile("Websites/Java2.html"));
+		String text= hp.getText("script","h1","h2","h3","h4","h5","ul","style","title","a");
+		WhoQuery query = new WhoQuery("who created Java");
+		
+		ArrayList<String> matches=query.getMatch();
+		query.printTypes();
+		
+		String[] sentences = Utilities.getSentences(text);
 		
 		
-		
-		while(true){
-			getStuff(s.nextLine());
+		for(String sentence : sentences){
+			boolean isAnswer=true;
+			for(String match: matches){
+				if(!sentence.contains(match)){
+					isAnswer= false;
+				}
+			}
+			if(isAnswer)System.out.println("Answer: "+sentence);
 		}
-		*/
-		String file=(HTMLParser.readFile("Websites/Java.html"));
-		System.out.println(HTMLParser.parse(file));
 		
-	}
-	
-	public void getStuff(String s){
-
-		
-
-		String text = s;
-
-		Annotation document = new Annotation(text);
-
-		pipeline.annotate(document);
-		List<CoreMap> sentences = document.get(SentencesAnnotation.class);
-
-		for(CoreMap sentence: sentences) {
-			 for (CoreLabel token: sentence.get(TokensAnnotation.class)) {
-				 String pos = token.get(PartOfSpeechAnnotation.class);
-				 System.out.println(pos);
-			 }
-			
-		}
 	}
 	
 	public static void main(String[] args){
