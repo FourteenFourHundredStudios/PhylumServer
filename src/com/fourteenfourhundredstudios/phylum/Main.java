@@ -9,6 +9,7 @@ public class Main {
 
 	public Main(){
 		
+		//GITHUB WORKS!!!
 		
 		NPLHandler.load();
 		//
