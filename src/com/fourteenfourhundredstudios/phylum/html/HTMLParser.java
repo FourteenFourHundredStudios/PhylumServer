@@ -9,47 +9,32 @@ public class HTMLParser {
 	
 	public HTMLParser(String html){
 		this.html=html;
-
 	    String str="";
 		int count=0;
-	//	boolean inHtml=false;
 		for(int i=0;i<html.length();i++){		
-			String c = html.substring(i,i+1);
-			
-			
-			
-			if(c.equals("<")){
-				
-				
+			String c = html.substring(i,i+1);			
+			if(c.equals("<")){	
 				if(str.length()>0){
 					elements.add(new HTMLElement("text",str));
 					str="";
-				}
-				
-				if(count == 0 ){  	
-			//		inHtml=true;
 				}
 				count++;
 				continue;
 			}else if(c.equals(">")){
 				count --;
 				if(count == 0 ){  
-			//		inHtml=false; 
 					elements.add(new HTMLElement("tag",str.toLowerCase()));
 					str="";
 					continue;
 				}
 			}
-			
 			str+=c;
-			
-			
 		}
-		
 	}
 
 	/*Make dynamic way to block more tags than script*/
 	public String getText(String... ignore){
+
 		String s = "";
 		boolean inScript = false;
 		for(HTMLElement i: elements){
