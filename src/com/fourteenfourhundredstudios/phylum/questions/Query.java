@@ -51,7 +51,7 @@ public class Query {
 	}
 	
 	public ArrayList<String> getMatch(){
-		return null;
+		return getPosWordType("NNP","NN","VB","VBD");
 	}
 	
 

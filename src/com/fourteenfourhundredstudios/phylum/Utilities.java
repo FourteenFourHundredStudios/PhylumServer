@@ -23,6 +23,12 @@ public class Utilities {
 		return f;
 	}
 	
+	public static void saveFile(String name,String text){
+		
+	}
+	
+	
+	
 	public static String[] getSentences(String str){
 		return str.split("\\.");
 	}

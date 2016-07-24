@@ -3,18 +3,16 @@ package com.fourteenfourhundredstudios.phylum;
 
 import com.fourteenfourhundredstudios.phylum.html.HTMLParser;
 import com.fourteenfourhundredstudios.phylum.questions.NPLHandler;
+import com.fourteenfourhundredstudios.phylum.questions.Query;
 import com.fourteenfourhundredstudios.phylum.questions.WhoQuery;
 
 public class Main {
 
 	public Main(){
-		
-		//GITHUB WORKS!!!
-		//GITHUB TEST 3
-		//GITHUB TEST 4
-		
+
 		
 		NPLHandler.load();
+
 		//
 		//ArrayList<String> nouns=query.getNouns();
 		
