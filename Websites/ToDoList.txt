@@ -1,0 +1,7 @@
+figure out how to get the subject of each websource and put it in a json at the top with the rest of the site in plain text.
+
+finish other type of questions.
+
+make the answers to questions more acurate
+
+write a website scraper
