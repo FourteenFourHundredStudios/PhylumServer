@@ -1,13 +1,14 @@
 package com.fourteenfourhundredstudios.phylum.onepage;
 
 import java.io.OutputStream;
+import java.util.HashMap;
 
 import com.fourteenfourhundredstudios.phylum.Utilities;
 
 public class HTMLPage extends ServerPage{
 
-	public HTMLPage(String file,OutputStream op) {
-		super(file,op);
+	public HTMLPage(String file,OutputStream op,HashMap<String,String> urlParams) {
+		super(file,op,urlParams);
 	}
 
 	public String getData(){

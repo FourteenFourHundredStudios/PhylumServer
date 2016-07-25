@@ -11,9 +11,12 @@ public class ServerPage {
 	 OutputStream op;
 	 String file;
 	 
-	 public ServerPage(String file,OutputStream op ){
+	 public ServerPage(String file,OutputStream op,HashMap<String,String> urlParams ){
+
 		 this.file="FileSystem/"+file;
+		 this.urlParams=urlParams;
 		 this.op=op;
+
 	 }
 	 
 	 public String getHeader(){
@@ -31,7 +34,6 @@ public class ServerPage {
 			 osw.flush();
 			 osw.write(getData());
 			 osw.flush();
-			 osw.close();
 		 }catch(Exception e){
 			 e.printStackTrace();
 		 }

@@ -5,14 +5,17 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 
 public class ImagePage extends ServerPage{
 
 	long length=0;
+	String imageType;
 	
-	public ImagePage(String file,OutputStream op) {
-		super(file,op);
-		File f= new File(file);
+	public ImagePage(String file,OutputStream op,HashMap<String,String> urlParams,String imageType) {
+		super(file,op,urlParams);
+		this.imageType=imageType;
+		File f= new File(this.file);
 		length=f.length();
 	}
 	
@@ -31,9 +34,9 @@ public class ImagePage extends ServerPage{
 	public String getHeader(){
 		return
 			"HTTP/1.1 200 The file is coming right up!\r\n" +
-		    "Server: MyOwnServer\r\n" +
+		    "Server: OnePage\r\n" +
 		    "Content-Length: " + length + "\r\n" +
-		    "Content-Type: image/jpg\r\n" + 
+		    "Content-Type: image/"+imageType+"\r\n" + 
 		    "\r\n";
 	}
 	
