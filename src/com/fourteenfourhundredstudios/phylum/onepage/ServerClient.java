@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.fourteenfourhundredstudios.phylum.onepage.pages.ResultPage;
+
 
 public class ServerClient {
 
@@ -33,15 +35,12 @@ public class ServerClient {
             try{
 
                 in = new BufferedReader(new InputStreamReader(me.getInputStream()));
-               // osw = new OutputStreamWriter(me.getOutputStream());
                 String line="";
 
                 while((line = in.readLine()) != null){
                 	if(line.equals(""))break;
                 	if(line.startsWith("GET")){
-                	//	send(get(line.split(" ")[1]));
                 		String getRequest=line.split(" ")[1];
-                		
                 		ServerPage serverPage=null;
                 		//parse URL params
                 		 if(getRequest.indexOf("?")>-1){
@@ -51,12 +50,13 @@ public class ServerClient {
                 		    		urlParams.put(s.split("=")[0],s.split("=")[1]);
                 		    	}
                 		    }else{
-                		    	urlParams.put(getRequest.substring(getRequest.indexOf("?")+1,getRequest.indexOf("=")), getRequest.substring(getRequest.indexOf("=")+1,getRequest.length()));
+                		    	urlParams.put(getRequest.substring(getRequest.indexOf("?")+1,getRequest.indexOf("=")), getRequest.substring(getRequest.indexOf("=")+1,getRequest.length()).replace("+"," "));
                 		    }
                 		    getRequest=getRequest.substring(0,getRequest.indexOf("?"));
                 		}
                 		String extension=getRequest.substring(getRequest.indexOf(".")+1);
                 		switch(extension){
+                			//when the server wants a file with an extension (EX: "http://phylum.us/index.html")
                 			case "html":
                 				serverPage = new HTMLPage(getRequest,me.getOutputStream(),urlParams);
                 				break;
@@ -64,12 +64,26 @@ public class ServerClient {
                 				serverPage = new ImagePage(getRequest,me.getOutputStream(),urlParams,extension);
                 				break;
                 			default:
-                				System.out.println("no extension");
+                				switch(getRequest.toLowerCase().substring(1)){
+                					//all pages that don't have a file extension (EX: "http://phylum.us/search")
+                					case "search":
+                						serverPage = new HTMLPage("/search.html",me.getOutputStream(),urlParams);
+                						break;
+                					case "result":
+                						serverPage = new ResultPage(getRequest,me.getOutputStream(),urlParams);
+                						break;
+                					case "":
+                						//if no extension return index page
+                						serverPage = new HTMLPage("/index.html",me.getOutputStream(),urlParams);
+                						break;
+                					default:
+                						System.out.println("put error page here");
+                				}
                 		}
                 		serverPage.sendResponse();
                 	}
                 }
-              //  System.out.println("\n");
+
                 in.close();
 
             }catch(Exception e){

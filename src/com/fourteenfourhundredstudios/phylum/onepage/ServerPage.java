@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ServerPage {
 
-	 Map<String,String> urlParams=new HashMap<String,String>();
+	 public Map<String,String> urlParams=new HashMap<String,String>();
 	 OutputStream op;
 	 String file;
 	 
