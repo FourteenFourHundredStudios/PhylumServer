@@ -8,8 +8,8 @@ import java.util.Map;
 public class ServerPage {
 
 	 public Map<String,String> urlParams=new HashMap<String,String>();
-	 OutputStream op;
-	 String file;
+	 public OutputStream op;
+	 public String file;
 	 
 	 public ServerPage(String file,OutputStream op,HashMap<String,String> urlParams ){
 

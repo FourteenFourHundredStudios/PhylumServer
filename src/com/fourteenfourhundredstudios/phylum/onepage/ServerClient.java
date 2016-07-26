@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.fourteenfourhundredstudios.phylum.onepage.pages.ErrorPage;
 import com.fourteenfourhundredstudios.phylum.onepage.pages.ResultPage;
 
 
@@ -77,7 +78,8 @@ public class ServerClient {
                 						serverPage = new HTMLPage("/index.html",me.getOutputStream(),urlParams);
                 						break;
                 					default:
-                						System.out.println("put error page here");
+                						serverPage = new ErrorPage(getRequest,me.getOutputStream(),urlParams);
+                						System.out.println("put error page here: "+getRequest);
                 				}
                 		}
                 		serverPage.sendResponse();
