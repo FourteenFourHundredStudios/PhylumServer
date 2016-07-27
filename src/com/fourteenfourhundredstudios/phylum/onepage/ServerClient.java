@@ -41,7 +41,9 @@ public class ServerClient {
                 while((line = in.readLine()) != null){
                 	if(line.equals(""))break;
                 	if(line.startsWith("GET")){
+                		
                 		String getRequest=line.split(" ")[1];
+                		System.out.println("Request: "+getRequest+"\n");
                 		ServerPage serverPage=null;
                 		//parse URL params
                 		 if(getRequest.indexOf("?")>-1){
@@ -59,6 +61,9 @@ public class ServerClient {
                 		switch(extension){
                 			//when the server wants a file with an extension (EX: "http://phylum.us/index.html")
                 			case "html":
+                				serverPage = new HTMLPage(getRequest,me.getOutputStream(),urlParams);
+                				break;
+                			case "css":
                 				serverPage = new HTMLPage(getRequest,me.getOutputStream(),urlParams);
                 				break;
                 			case "jpg":
