@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class WhoQuery extends Query{
 	
-	public WhoQuery(String fileData,String[] text){
-		super(fileData,text);
+	public WhoQuery(String fileData){
+		super(fileData);
 	}
 	
 	public ArrayList<String> getMatch(){

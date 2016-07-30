@@ -20,12 +20,8 @@ public class ResultPage extends HTMLPage{
 		String HTML="<title>Phylum Results</title><div align='center'>";
 		
 
-		HTMLParser hp = new HTMLParser(Utilities.readFile("Websites/WWII 2.html"));
-		String text= hp.getText("script","h1","h2","h3","h4","h5","ul","style","title","head");
-		String[] sentences = Utilities.getSentences(text);
 
-		
-		Query query = new Query(urlParams.get("searchBox"),sentences);
+		Query query = new Query(urlParams.get("searchBox"));
 		query.printTypes();
 		
 		for(String answer:query.getAnswer()){

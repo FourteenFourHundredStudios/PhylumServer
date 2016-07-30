@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class WhatQuery extends Query{
 
-	public WhatQuery(String query, String[] text) {
-		super(query, text);
+	public WhatQuery(String query) {
+		super(query);
 		
 	}
 	

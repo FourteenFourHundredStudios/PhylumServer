@@ -1,15 +1,21 @@
 package com.fourteenfourhundredstudios.phylum.questions;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.fourteenfourhundredstudios.phylum.Utilities;
 
 public class Query {
 	
 	String query;
-	String[] text;
+
 	
-	public Query(String query,String[] text){
+	public Query(String query){
 		this.query=query;
-		this.text=text;
+
 	}
 	
 	public void printTypes(){
@@ -20,20 +26,30 @@ public class Query {
 	}
 	
 	public ArrayList<String> getAnswer(){
+		ArrayList<String> answers=new ArrayList<String> ();
 		
+		//arraylist of relevent words from question
 		ArrayList<String> matches=getMatch();
 		
+		File folder = new File("Websites/");
+		File[] listOfFiles = folder.listFiles();
+
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      //if (listOfFiles[i].isFile()) {
+		    	try{
+		    		String json=(Utilities.readLine(listOfFiles[i].getPath()));
+		    		JSONObject jo = new JSONObject(json);
+		    		JSONArray topics= jo.getJSONArray("topics");
+		    		
+		    	}catch(Exception e ){
+		    		e.printStackTrace();
+		    		System.out.println("Could not parse JSON");
+		    	}
+		    	
+		    }
 		
-		ArrayList<String> answers=new ArrayList<String>();
-		for(String sentence : text){
-			boolean isAnswer=true;
-			for(String match: matches){
-				if(!sentence.contains(match)){
-					isAnswer= false;
-				}
-			}
-			if(isAnswer)answers.add(sentence);
-		}
+		
+	
 		return answers;
 	}
 	
