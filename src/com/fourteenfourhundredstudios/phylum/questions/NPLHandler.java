@@ -18,13 +18,13 @@ public class NPLHandler {
 	static StanfordCoreNLP pipeline;
 	static Properties props;
 	
-	
+	//loads npl handler
 	public static void load(){
 		props = new Properties();
 		props.setProperty("annotators", "tokenize, ssplit, pos");
 		pipeline = new StanfordCoreNLP(props);
 	}
-	
+	//returns parts of speech for each world in a arraylist
 	public static ArrayList<String[]> getPos(String s){
 		String text = s;
 		ArrayList<String[]> tokenlist = new ArrayList<String[]>();
