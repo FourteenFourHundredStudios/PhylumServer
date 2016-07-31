@@ -19,7 +19,7 @@ public class Main {
 
 
 		
-		Query query = new Query("Who acheived agreement with Hitler");
+		Query query = new Query("Who Axis powers");
 		query.printTypes();
 		
 		for(String answer:query.getAnswer()){

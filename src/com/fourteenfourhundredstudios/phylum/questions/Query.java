@@ -25,6 +25,7 @@ public class Query {
 		}
 	}
 	
+	
 	public ArrayList<String> getAnswer(){
 		ArrayList<String> answers=new ArrayList<String> ();
 		
@@ -38,12 +39,61 @@ public class Query {
 		      //if (listOfFiles[i].isFile()) {
 		    	try{
 		    		String json=(Utilities.readLine(listOfFiles[i].getPath()));
-		    		JSONObject jo = new JSONObject(json);
-		    		JSONArray topics= jo.getJSONArray("topics");
+		    		boolean canUse=false;
+		    		for(String s:matches){
+		    		//	System.out.println(JSO)
+			    		if(json.contains(s)){
+
+			    			/*
+			    			count matching words for pageRate
+			    			JSONObject jo = new JSONObject(json);
+			    			 * JSONArray topics= jo.getJSONArray("topics");
+			    			 
+			    			for(int x=0;x<topics.length();x++){
+			    				
+			    			}*/
+			    			
+			    			canUse=true;
+			    			
+			    			//do not break if getting page rate
+			    			break;
+			    		}
+		    		}
+		    		if(!canUse)continue;
+		
+		    		String[] fileLines=Utilities.readFile(listOfFiles[i].getPath()).split("\n");
+		    	//	System.out.println("fefe "+fileLines[1]);
 		    		
+		    		String[] sentences =fileLines[1].split("\\.");
+		    		
+		    		for(String sentence:sentences){
+		    			boolean isAnswer=true;
+		    		
+		    			/*
+		    			String[] words=sentence.split(" ");
+		    			for(String word:words){
+		    				if(!(sentence.contains(word))){
+		    					isAnswer=false;
+		    					break;
+		    				}
+		    			}
+		    			*/
+		    			
+		    		//	System.out.println(match);
+		    			
+		    			for(String match:matches){
+		    				
+		    				if(!(sentence.contains(match))){
+		    					isAnswer=false;
+		    				}
+		    			}
+		    			if(isAnswer){
+		    				answers.add(sentence);
+		    			}
+		    		}
 		    	}catch(Exception e ){
 		    		e.printStackTrace();
-		    		System.out.println("Could not parse JSON");
+		    		System.out.println("Could not parse JSON or something");
 		    	}
 		    	
 		    }

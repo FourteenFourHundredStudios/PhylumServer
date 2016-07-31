@@ -14,7 +14,7 @@ public class Utilities {
 		try{
 			br = new BufferedReader(new FileReader(new File(fn)));
 			while(br.ready()){
-				f+=br.readLine();
+				f+=br.readLine()+"\n";
 			}
 		f=f.replace("\t", "");
 		}catch(Exception e){
@@ -37,6 +37,11 @@ public class Utilities {
 		return f;
 	}
 	
+	public static void printArray(String[] arr){
+		for(String s:arr){
+			System.out.println(s+",");
+		}
+	}
 	
 	public static void saveFile(String name,String text){
 		
